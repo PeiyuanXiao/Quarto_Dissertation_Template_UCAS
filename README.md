@@ -1,15 +1,49 @@
-# Quarto Dissertation Template for UCAS
+<samp>DISSERTATION TEMPLATE</samp>
 
-这是一个面向 **中国科学院大学（UCAS）学位论文** 的 Quarto/RStudio 写作模板。项目基于中国科学院大学学位论文 LaTeX 模板整理而来，保留原模板的封面、声明页、页眉页脚、图表目录、参考文献样式等 LaTeX 排版逻辑，同时把正文写作入口迁移到 Quarto `.qmd` 文件，便于在 RStudio 中编辑、预览和版本管理。
+<h1><b><i>Quarto Dissertation Template for the University of Chinese Academy of Sciences</i></b></h1>
 
-本模板的目标是：
+<hr />
 
-- 用 RStudio/Quarto 编写学位论文正文；
-- 复用 UCAS LaTeX 模板的正式版式；
-- 支持中文论文、英文摘要、图表目录、附录、致谢、作者简历和 GB/T 7714 参考文献；
-- 避免把 LaTeX 编译产物提交到 Git 仓库。
+[![Project Status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Quarto](https://img.shields.io/badge/Quarto-PDF-blue.svg)](https://quarto.org/)
+[![RStudio](https://img.shields.io/badge/RStudio-ready-75AADB.svg)](https://posit.co/products/open-source/rstudio/)
+[![TeX engine: XeLaTeX](https://img.shields.io/badge/TeX-XeLaTeX-lightgrey.svg)](https://tug.org/xetex/)
 
-## 项目结构
+This repository provides a **Quarto/RStudio dissertation writing template** for students at the **University of Chinese Academy of Sciences (UCAS)**.
+
+It wraps the official UCAS LaTeX thesis style in a Quarto project, so the dissertation can be written in `.qmd` files while preserving the original LaTeX layout for the cover pages, declaration, page headers, table of contents, lists of figures and tables, appendices, acknowledgements, and GB/T 7714 bibliography formatting.
+
+The template is designed for authors who want:
+
+- a familiar RStudio + Quarto writing workflow;
+- UCAS-style PDF output through XeLaTeX;
+- chapter-based `.qmd` source files;
+- BibLaTeX/Biber references using GB/T 7714 styles;
+- a Git-friendly project layout that keeps build products out of version control.
+
+------------------------------------------------------------------------
+
+### 👤 Maintainer
+
+**Pei-yuan Xiao**  
+University of Chinese Academy of Sciences
+
+Repository: <https://github.com/PeiyuanXiao/Quarto_Dissertation_Template_UCAS>
+
+------------------------------------------------------------------------
+
+### 📝 What this template contains
+
+This project contains two parallel resources:
+
+1.  A working **Quarto dissertation project** in [`thesis/`](thesis/).
+2.  A preserved copy of the original UCAS LaTeX template in [`中国科学院大学学位论文LaTeX模板/`](中国科学院大学学位论文LaTeX模板/), kept for comparison and traceability.
+
+The working Quarto project has already been adapted for a Windows + TinyTeX + RStudio workflow. It uses a custom Quarto extension in `thesis/_extensions/ucasthesis/` to connect Pandoc/Quarto output with the UCAS LaTeX class.
+
+------------------------------------------------------------------------
+
+### 📁 Contents
 
 ```text
 Quarto_Dissertation_Template_UCAS/
@@ -33,82 +67,61 @@ Quarto_Dissertation_Template_UCAS/
     ├── appendices/
     │   └── appendix-a.qmd
     ├── Biblio/
-    │   ├── ref.bib
-    │   └── gb7714 / gbt7714 样式文件
     ├── Img/
-    │   └── 图片与校徽资源
     ├── Style/
-    │   ├── ucasthesis.cls
-    │   ├── ucasthesis.cfg
-    │   ├── artratex.sty
-    │   └── artracom.sty
     ├── Tex/
-    │   └── figuretable.tex
     └── _extensions/
         └── ucasthesis/
-            ├── _extension.yml
-            ├── template.tex
-            ├── preamble.tex
-            └── partials/
 ```
 
-## 主要文件说明
+#### Key files
 
-### RStudio 项目
+- [:file_folder: `thesis/`](thesis/) — the main Quarto dissertation project.
 
-- `Quarto_Dissertation_Template_UCAS.Rproj`  
-  RStudio 项目文件。建议从这个文件打开项目。
+- [`thesis/_quarto.yml`](thesis/_quarto.yml) — the Quarto book configuration. This controls chapter order, output directory, and the custom `ucasthesis-pdf` format.
 
-### Quarto 论文项目
+- [`thesis/frontinfo.tex`](thesis/frontinfo.tex) — Chinese and English cover-page metadata, including title, author, supervisor, degree, major, institute, and date.
 
-- `thesis/_quarto.yml`  
-  Quarto book 项目配置。章节顺序、输出目录和 UCAS PDF 格式都在这里配置。
+- [`thesis/index.qmd`](thesis/index.qmd) — front matter, including Chinese abstract, English abstract, keywords, table of contents, lists of figures and tables, and symbol list.
 
-- `thesis/index.qmd`  
-  论文前置部分，包括中文摘要、英文摘要、关键词、目录、图表目录和符号列表。正文开始前的 `\mainmatter` 也在这里切换。
+- [:file_folder: `thesis/chapters`](thesis/chapters) — main dissertation chapters written in Quarto Markdown.
 
-- `thesis/chapters/*.qmd`  
-  正文章节。默认提供绪论、方法、结论三个示例章节，可按实际论文结构增删。
+- [`thesis/references.qmd`](thesis/references.qmd) — bibliography output and appendix transition.
 
-- `thesis/references.qmd`  
-  参考文献输出和附录切换入口。当前模板使用原 UCAS LaTeX 模板的 `biblatex + biber + GB/T 7714` 方案。
+- [:file_folder: `thesis/appendices`](thesis/appendices) — appendix chapters.
 
-- `thesis/appendices/*.qmd`  
-  附录内容。
+- [`thesis/backmatter.qmd`](thesis/backmatter.qmd) — acknowledgements, author biography, publications, patents, projects, and awards.
 
-- `thesis/backmatter.qmd`  
-  致谢、作者简历、攻读学位期间成果等后置内容。
+- [:file_folder: `thesis/Biblio`](thesis/Biblio) — BibTeX database and GB/T 7714 bibliography style files.
 
-- `thesis/frontinfo.tex`  
-  中英文封面信息，包括题目、作者、导师、学位、专业、培养单位、日期等。写作前应优先修改这里。
+- [:file_folder: `thesis/Style`](thesis/Style) — UCAS LaTeX class and style files. These are responsible for most of the official thesis layout.
 
-### LaTeX 模板资源
+- [:file_folder: `thesis/_extensions/ucasthesis`](thesis/_extensions/ucasthesis) — custom Quarto extension that connects Quarto output to the UCAS LaTeX template.
 
-- `thesis/Style/`  
-  UCAS 模板核心 LaTeX 类和样式文件。`artratex.sty` 已针对 Quarto/TinyTeX 编译环境做了兼容调整。
+------------------------------------------------------------------------
 
-- `thesis/Biblio/ref.bib`  
-  参考文献数据库。正文中使用 `\citep{key}` 等原模板引用命令。
+### 🚀 How to use
 
-- `thesis/Img/`  
-  图片资源目录。校徽 `ucas_logo.pdf` 位于这里。
+#### 1. Clone the repository
 
-- `thesis/_extensions/ucasthesis/`  
-  Quarto 自定义格式扩展。它负责把 Quarto 输出接入 UCAS LaTeX 模板。
+```sh
+git clone https://github.com/PeiyuanXiao/Quarto_Dissertation_Template_UCAS.git
+cd Quarto_Dissertation_Template_UCAS
+```
 
-- `中国科学院大学学位论文LaTeX模板/`  
-  原始 LaTeX 模板备份，便于对照和追溯。
+#### 2. Open the RStudio project
 
-## 环境要求
+Open:
 
-建议使用：
+```text
+Quarto_Dissertation_Template_UCAS.Rproj
+```
 
-- RStudio
-- Quarto
-- TinyTeX、TeX Live 或 MiKTeX
-- Git
+This keeps the project root stable when working in RStudio.
 
-PDF 编译至少需要以下命令可用：
+#### 3. Check the required tools
+
+In the RStudio Terminal or PowerShell, check that Quarto and the TeX tools are available:
 
 ```powershell
 where quarto
@@ -117,7 +130,7 @@ where biber
 where latexmk
 ```
 
-如果缺少 TeX 工具链，可在 R 中安装 TinyTeX：
+If the TeX tools are missing, install TinyTeX from R:
 
 ```r
 install.packages("tinytex")
@@ -125,175 +138,249 @@ tinytex::install_tinytex()
 tinytex::tlmgr_path()
 ```
 
-第一次渲染时，TinyTeX 可能会自动安装缺失的 LaTeX 包。这是正常现象。
+#### 4. Render the PDF
 
-## 使用方式
-
-### 1. 打开项目
-
-用 RStudio 打开：
-
-```text
-Quarto_Dissertation_Template_UCAS.Rproj
-```
-
-### 2. 渲染 PDF
-
-在 RStudio Terminal 或 PowerShell 中，从仓库根目录运行：
+From the repository root:
 
 ```powershell
 quarto render thesis
 ```
 
-也可以进入 `thesis/` 后运行：
+Alternatively, enter the thesis directory first:
 
 ```powershell
+cd thesis
 quarto render
 ```
 
-如果 PowerShell 执行策略允许，也可以使用：
+If your PowerShell execution policy allows local scripts, you can also run:
 
 ```powershell
 .\thesis\render.ps1
 ```
 
-渲染成功后，PDF 位于：
+The rendered PDF is written to:
 
 ```text
 thesis/_output/中国科学院大学学位论文.pdf
 ```
 
-### 3. 修改封面信息
+> **Note:** On the first render, TinyTeX may install missing LaTeX packages automatically. This is expected.
 
-编辑：
+------------------------------------------------------------------------
+
+### ✍️ Writing workflow
+
+#### Edit the cover information
+
+Update:
 
 ```text
 thesis/frontinfo.tex
 ```
 
-重点修改：
+This file controls the Chinese and English cover pages. Edit the thesis title, author, supervisor, degree, degree type, major, institute, and submission date.
 
-- 中文题目与英文题目；
-- 作者姓名；
-- 导师姓名、职称、单位；
-- 学位级别与学位类别；
-- 专业名称；
-- 培养单位；
-- 毕业日期。
+#### Write the abstracts and front matter
 
-### 4. 编写正文
-
-正文使用 `.qmd` 文件：
+Edit:
 
 ```text
-thesis/chapters/01-introduction.qmd
-thesis/chapters/02-methods.qmd
-thesis/chapters/03-conclusion.qmd
+thesis/index.qmd
 ```
 
-新增章节时，例如添加 `04-results.qmd`：
+This file contains:
 
-1. 在 `thesis/chapters/` 中创建文件；
-2. 在 `thesis/_quarto.yml` 的 `book.chapters` 中加入：
+- Chinese abstract;
+- English abstract;
+- Chinese and English keywords;
+- table of contents;
+- lists of figures and tables;
+- symbol list.
+
+#### Write the main chapters
+
+Edit or add files in:
+
+```text
+thesis/chapters/
+```
+
+The default chapter files are:
+
+```text
+01-introduction.qmd
+02-methods.qmd
+03-conclusion.qmd
+```
+
+To add a new chapter, create a new `.qmd` file, for example:
+
+```text
+thesis/chapters/04-results.qmd
+```
+
+Then register it in [`thesis/_quarto.yml`](thesis/_quarto.yml):
 
 ```yaml
-- chapters/04-results.qmd
+book:
+  chapters:
+    - index.qmd
+    - chapters/01-introduction.qmd
+    - chapters/02-methods.qmd
+    - chapters/03-conclusion.qmd
+    - chapters/04-results.qmd
+    - references.qmd
+    - appendices/appendix-a.qmd
+    - backmatter.qmd
 ```
 
-### 5. 插入图片
+#### Write appendices and back matter
 
-建议把图片放入：
+- Appendices: [`thesis/appendices/`](thesis/appendices/)
+- Acknowledgements and academic record: [`thesis/backmatter.qmd`](thesis/backmatter.qmd)
+
+------------------------------------------------------------------------
+
+### 🖼️ Figures and tables
+
+Store figures in:
 
 ```text
 thesis/Img/
 ```
 
-Markdown 图片示例：
+Simple Markdown figure:
 
 ```markdown
-![样图](../Img/c06h06.png){#fig-sample width=40%}
+![Sample figure](../Img/c06h06.png){#fig-sample width=40%}
 ```
 
-如果需要 UCAS 模板的双语图题、图注或复杂子图，建议使用原生 LaTeX：
+For UCAS-style bilingual captions, figure notes, or complex subfigures, use raw LaTeX:
 
 ```tex
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.40\textwidth]{c06h06}
     \bicaption{\enspace 样图}{\enspace Sample Figure}
-    \fignote{对图片的注释}
+    \fignote{Notes for this figure}
     \label{fig:sample}
 \end{figure}
 ```
 
-### 6. 参考文献
+Tables can be written in Markdown, Quarto, or raw LaTeX. For final dissertation formatting, raw LaTeX tables may offer the most precise control.
 
-参考文献写入：
+------------------------------------------------------------------------
+
+### 📚 References
+
+Add references to:
 
 ```text
 thesis/Biblio/ref.bib
 ```
 
-正文中引用：
+The template currently follows the original UCAS LaTeX bibliography setup:
+
+- `biblatex`;
+- `biber`;
+- GB/T 7714 bibliography styles.
+
+Use LaTeX citation commands in the `.qmd` files:
 
 ```tex
 \citep{lamport1986document}
 ```
 
-当前模板沿用原 UCAS 模板的 `biblatex + biber + GB/T 7714` 设置。渲染时 Quarto 会调用 `biber` 生成参考文献。
+After rendering, `biber` is called automatically by Quarto.
 
-## Git 使用建议
+------------------------------------------------------------------------
 
-本仓库已忽略以下编译或本地状态文件：
+### 💻 Computational environment
 
-- `.Rproj.user/`
-- `.Rhistory`
-- `thesis/.quarto/`
-- `thesis/.localappdata/`
-- `thesis/_output/`
-- LaTeX 编译中间文件，如 `.aux`、`.bbl`、`.bcf`、`.log`、`.toc` 等
+The template has been tested with:
 
-建议提交源文件：
+| Component | Role |
+|---|---|
+| RStudio | editing environment |
+| Quarto | document project and rendering workflow |
+| XeLaTeX | PDF engine |
+| Biber | bibliography processor |
+| TinyTeX / TeX Live | LaTeX package system |
+| Git | version control |
 
-- `.qmd`
-- `.tex`
-- `.yml`
-- `.bib`
-- 模板样式文件
-- 图片资源
+Useful checks:
 
-不建议提交自动生成的 PDF 和 LaTeX 中间文件，除非需要发布正式版本。
+```powershell
+quarto --version
+where xelatex
+where biber
+where latexmk
+```
 
-## 常见问题
+------------------------------------------------------------------------
 
-### 找不到 `xelatex`
+### 📤 Outputs
 
-确认 TeX 发行版已安装，并且 `xelatex` 在 PATH 中：
+The main output is:
+
+```text
+thesis/_output/中国科学院大学学位论文.pdf
+```
+
+Build products are intentionally ignored by Git, including:
+
+- `thesis/_output/`;
+- `thesis/.quarto/`;
+- `thesis/.localappdata/`;
+- LaTeX auxiliary files such as `.aux`, `.bbl`, `.bcf`, `.log`, `.toc`, `.lof`, and `.lot`.
+
+This keeps the repository focused on source files rather than generated files.
+
+------------------------------------------------------------------------
+
+### 🧰 Troubleshooting
+
+#### `xelatex` is not found
+
+Install TinyTeX or another TeX distribution, then verify:
 
 ```powershell
 where xelatex
 ```
 
-### 缺少 `.sty` 文件
+#### A `.sty` file is missing
 
-TinyTeX 通常会自动安装缺失包。也可以手动安装，例如：
+TinyTeX often installs missing packages automatically. You can also install them manually:
 
 ```powershell
 tlmgr install mathtools
 ```
 
-### 字体报错
+#### PowerShell refuses to run `render.ps1`
 
-模板已将 Windows 中文字体分支调整为 TeX Live/TinyTeX 自带的 Fandol 字体，以提高可复现性。如果仍有字体问题，优先确认 TinyTeX 字体包是否完整。
-
-### PowerShell 不允许运行 `render.ps1`
-
-可以不用脚本，直接运行：
+Use Quarto directly:
 
 ```powershell
 quarto render thesis
 ```
 
-## 许可证与来源
+#### Font errors
 
-本项目基于中国科学院大学学位论文 LaTeX 模板整理为 Quarto/RStudio 写作模板。原模板文件保留在 `中国科学院大学学位论文LaTeX模板/` 中，便于对照。使用本模板时请自行核对所在院系、学科群和当年学位论文撰写规范的最新要求。
+The template has been adjusted to use Fandol Chinese fonts from TeX Live/TinyTeX in the Windows branch of the UCAS style file. If font errors persist, update TinyTeX packages:
+
+```powershell
+tlmgr update --self --all
+```
+
+------------------------------------------------------------------------
+
+### 📄 Notes on licensing and template source
+
+This repository adapts the UCAS LaTeX thesis template into a Quarto/RStudio workflow. The original LaTeX template files are preserved in:
+
+```text
+中国科学院大学学位论文LaTeX模板/
+```
+
+Please check the latest UCAS, institute, and discipline-specific dissertation requirements before final submission. This project is a working template, not an official university release.
