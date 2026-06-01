@@ -1,0 +1,24 @@
+# 研究材料与方法 {#chap-methods}
+
+## 材料来源
+
+这里撰写研究材料、数据来源或语料说明。
+
+## 方法设计
+
+数学公式可以直接使用 LaTeX：
+
+$$
+\frac{\partial \rho}{\partial t} + \nabla\cdot(\rho\Vector{V}) = 0
+$$
+
+如果需要模板中的公式编号和交叉引用，可使用原生 LaTeX 环境：
+
+```{=latex}
+\begin{equation}\label{eq:continuity}
+    \frac{\partial \rho}{\partial t} + \nabla\cdot(\rho\Vector{V}) = 0
+\end{equation}
+```
+
+正文中引用公式可写作 `\eqref{eq:continuity}`。
+

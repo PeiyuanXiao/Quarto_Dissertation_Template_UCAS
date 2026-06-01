@@ -1,0 +1,34 @@
+```{=latex}
+\thispagestyle{appendixheader}
+\backmatter
+\chapter[致谢]{致\quad 谢}\chaptermark{致\quad 谢}
+```
+
+此处填写致谢。
+
+```{=latex}
+\rightline{2026年6月}
+\chapter{作者简历及攻读学位期间发表的学术论文与其他相关学术成果}
+\section*{作者简历：}
+```
+
+这里填写作者简历。
+
+```{=latex}
+\section*{已发表（或正式接受）的学术论文：}
+\begin{enumerate}[nosep]
+    \item 已发表的工作1
+    \item 已发表的工作2
+\end{enumerate}
+
+\section*{申请或已获得的专利：}
+```
+
+无。
+
+```{=latex}
+\section*{参加的研究项目及获奖情况：}
+```
+
+这里填写研究项目和获奖情况。
+

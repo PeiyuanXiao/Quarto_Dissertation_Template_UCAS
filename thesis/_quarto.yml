@@ -1,0 +1,24 @@
+project:
+  type: book
+  output-dir: _output
+
+book:
+  title: "中国科学院大学学位论文"
+  chapters:
+    - index.qmd
+    - chapters/01-introduction.qmd
+    - chapters/02-methods.qmd
+    - chapters/03-conclusion.qmd
+    - references.qmd
+    - appendices/appendix-a.qmd
+    - backmatter.qmd
+
+format:
+  ucasthesis-pdf:
+    keep-tex: true
+
+execute:
+  echo: false
+  warning: false
+  message: false
+

@@ -1,0 +1,29 @@
+# 绪论 {#chap-introduction}
+
+## 研究背景
+
+这里撰写绪论内容。Quarto 正文使用 Markdown 语法，普通段落可以直接写中文；需要 LaTeX 模板专有命令时，可以用原生 LaTeX 代码块。
+
+例如，可以继续使用模板提供的 LaTeX 引用命令 `\citep{lamport1986document}`。当前扩展把文献加载交给 `Style/artratex.sty`，因此参考文献库固定为 `Biblio/ref.bib`。
+
+## 研究问题
+
+建议在绪论中交代选题背景、国内外研究述评、论文要解决的问题、研究方法和章节安排。
+
+## 图表示例
+
+图片可以用 Markdown 插入：
+
+![样图](../Img/c06h06.png){#fig-sample width=40%}
+
+需要使用原模板的双语图题、图注或复杂子图时，保留 LaTeX 写法更稳：
+
+```{=latex}
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.40\textwidth]{c06h06}
+    \bicaption{\enspace 样图}{\enspace Sample Figure}
+    \fignote{对图片的注释}
+    \label{fig:latex-sample}
+\end{figure}
+```

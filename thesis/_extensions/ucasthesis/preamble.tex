@@ -1,0 +1,13 @@
+%% ==========================================================================
+%% preamble.tex —— 由 ucasthesis Quarto 扩展注入到导言区
+%% 复刻原 Thesis.tex 中对 artratex / artracom 的加载（去掉 super,numbers，
+%% 改用 biber 让 artratex 自己加载 biblatex + GB/T 7714 样式）。
+%% ==========================================================================
+\usepackage{caption}
+%% biber: 使用 biblatex 后端 + Biblio/gb7714-2015 样式；其余为原模板默认功能模块
+\usepackage[biber,numbers,list,table,math]{Style/artratex}
+\usepackage{Style/artracom}% 用户自定义命令
+
+%% Pandoc 会注入一些它假定存在的命令；与本模板共存所需的兜底定义放在这里。
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}

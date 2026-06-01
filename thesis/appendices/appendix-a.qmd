@@ -1,0 +1,10 @@
+# 附录中的材料 {#chap-appendix-a}
+
+这里撰写附录内容。附录中如需使用原模板的附图、附表环境，可以继续使用原生 LaTeX。
+
+```{=latex}
+\begin{equation}\label{eq:appendix-sample}
+    a^2 + b^2 = c^2
+\end{equation}
+```
+

@@ -1,0 +1,51 @@
+```{=latex}
+\intobmk\chapter*{摘\quad 要}
+\setcounter{page}{1}
+\pagenumbering{Roman}
+```
+
+这里撰写中文摘要。摘要应概括论文的研究目的、方法、主要结果和结论，突出创新点，避免插入图表、公式和参考文献。
+
+```{=latex}
+\keywords{中国科学院大学，学位论文，Quarto}
+
+\intobmk\chapter*{Abstract}
+```
+
+Write the English abstract here. It should correspond to the Chinese abstract and summarize the research question, methods, findings, and contributions.
+
+```{=latex}
+\KEYWORDS{University of Chinese Academy of Sciences, Thesis, Quarto}
+
+\pagestyle{enfrontmatterstyle}
+\cleardoublepage\pagestyle{frontmatterstyle}
+
+{
+\linespread{1.2}
+\intobmk*{\cleardoublepage}{\contentsname}
+\newpage
+\tableofcontents
+\intobmk*{\cleardoublepage}{图表目录}
+\pagestyle{figureheader}
+\input{Tex/figuretable}
+}
+
+\thispagestyle{figureheader}
+\intobmk\chapter*{符号列表}
+```
+
+```{=latex}
+\section*{字符}
+\nomenclatureitem[\textbf{Unit}]{\textbf{Symbol}}{\textbf{Description}}
+\nomenclatureitem[$\Unit{m^{2} \cdot s^{-2} \cdot K^{-1}}$]{$R$}{the gas constant}
+
+\section*{缩写}
+\nomenclatureitem{UCAS}{University of Chinese Academy of Sciences}
+\nomenclatureitem{QMD}{Quarto Markdown}
+
+\mainmatter
+\renewcommand{\thefigure}{\thechapter-\arabic{figure}}
+\renewcommand{\thetable}{\thechapter-\arabic{table}}
+\renewcommand{\theequation}{\thechapter-\arabic{equation}}
+```
+
