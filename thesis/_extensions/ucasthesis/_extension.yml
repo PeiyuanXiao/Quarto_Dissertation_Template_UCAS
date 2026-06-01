@@ -23,6 +23,8 @@ contributes:
       link-citations: true
       # ---- 参考文献由 Style/artratex.sty 统一加载，正文使用 \citep{} 等命令 ----
       suppress-bibliography: true
+      filters:
+        - cite-to-latex.lua
       # ---- 注入前导/正文片段 ----
       include-in-header:
         - preamble.tex

@@ -185,7 +185,31 @@ thesis/backmatter.qmd
 
 The detailed writing guide is maintained in [`thesis/README.md`](thesis/README.md).
 
-#### 6. Render the official PDF
+#### 6. Manage references with Zotero
+
+The recommended workflow is Zotero + Better BibTeX:
+
+```text
+Zotero library
+      ↓ Better BibTeX automatic export
+thesis/Biblio/ref.bib
+      ↓ citation keys in .qmd
+[@citationKey] or @citationKey
+      ↓ Quarto PDF render
+UCAS-style biblatex / biber bibliography
+```
+
+For example:
+
+```markdown
+The Longtan assemblage has been interpreted as a Quina techno-complex [@ruan2025quina].
+
+@ruan2025quina provides a detailed technological reconstruction of the assemblage.
+```
+
+In PDF output, the template converts these citations to the UCAS LaTeX citation commands. Do not manually type numbered references such as `[1]` in new writing unless you are temporarily migrating a Word manuscript.
+
+#### 7. Render the official PDF
 
 From the repository root:
 
@@ -214,7 +238,7 @@ thesis/_output/中国科学院大学学位论文.pdf
 
 > **Note:** On the first render, TinyTeX may install missing LaTeX packages automatically. This is expected.
 
-#### 7. Render a DOCX draft
+#### 8. Render a DOCX draft
 
 The DOCX output is intended for content review, comments, and supervisor feedback. It does **not** reproduce the formal UCAS LaTeX layout.
 
@@ -228,7 +252,7 @@ The DOCX file is written to:
 thesis/_output/
 ```
 
-#### 8. Version the source files
+#### 9. Version the source files
 
 Commit source files, not build products:
 
@@ -248,7 +272,7 @@ The repository ignores Quarto caches, LaTeX auxiliary files, and rendered output
 A Word manuscript on Middle Paleolithic Quina technology in Yunnan has been converted into a Quarto example:
 
 ```text
-thesis/examples/quina-article.qmd
+thesis/examples/quina-thesis-chapter.qmd
 ```
 
 Associated extracted figures are stored in:
@@ -257,7 +281,7 @@ Associated extracted figures are stored in:
 thesis/Img/example-quina/
 ```
 
-This example is useful for seeing how a conventional Chinese academic article can be reorganized into Quarto Markdown. It is not included in the default dissertation render; copy sections from it into `thesis/index.qmd` or `thesis/chapters/*.qmd` as needed.
+This example is formatted as a dissertation chapter rather than as a journal article. It removes the article title, author block, abstract, and keywords, uses thesis-style sectioning, Zotero/Better BibTeX citation keys, and UCAS-style figure environments. It is not included in the default dissertation render; copy it into `thesis/chapters/` and register it in `_quarto.yml` if you want to render it as part of the thesis.
 
 ------------------------------------------------------------------------
 

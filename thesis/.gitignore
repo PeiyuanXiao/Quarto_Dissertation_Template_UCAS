@@ -3,6 +3,8 @@
 /_output/
 /index.tex
 /中国科学院大学学位论文.tex
+/examples/*.html
+/examples/*_files/
 /*.loappfig
 /*.loapptab
 /*.aux

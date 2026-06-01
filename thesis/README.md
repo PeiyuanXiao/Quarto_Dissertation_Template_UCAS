@@ -195,7 +195,44 @@ Add BibTeX entries to:
 Biblio/ref.bib
 ```
 
-Use the original UCAS citation commands in `.qmd` files:
+### Recommended Zotero workflow
+
+The recommended workflow is:
+
+1. Install Zotero.
+2. Install the Zotero plugin **Better BibTeX**.
+3. Create a Zotero collection for the dissertation.
+4. Right click the collection and choose **Export Collection...**.
+5. Choose **Better BibLaTeX** or **Better BibTeX**.
+6. Enable **Keep updated**.
+7. Export to:
+
+```text
+Biblio/ref.bib
+```
+
+After this setup, Zotero becomes the reference manager and `Biblio/ref.bib` becomes the automatically updated bibliography database used by Quarto/XeLaTeX.
+
+### Citation syntax in `.qmd`
+
+Use Pandoc/Quarto citation syntax:
+
+```markdown
+The Longtan assemblage has been interpreted as a Quina techno-complex [@ruan2025quina].
+
+@ruan2025quina provides a detailed technological reconstruction.
+```
+
+For the UCAS PDF format, the template converts these citation forms to LaTeX:
+
+```text
+[@key]  -> \citep{key}
+@key    -> \citet{key}
+```
+
+This lets you write in a Zotero-friendly Quarto style while still using the UCAS LaTeX bibliography backend.
+
+You can also use the original UCAS citation commands directly:
 
 ```tex
 \citep{lamport1986document}
@@ -209,6 +246,8 @@ The PDF workflow uses:
 - GB/T 7714 bibliography styles in `Biblio/`.
 
 If Biber reports `Found 0 citekeys`, it usually means no `\citep{...}` or `\citet{...}` commands have been used yet.
+
+Do not manually type fixed numbered citations such as `[1]`, `[2]`, or `[3]` in new writing. Those numbers will not update automatically when references are added, deleted, or reordered. If a Word manuscript contains fixed numbered references, treat them as a temporary migration state and replace them with citation keys.
 
 ## Equations
 
@@ -245,17 +284,15 @@ Then refer to it with:
 The example file:
 
 ```text
-examples/quina-article.qmd
+examples/quina-thesis-chapter.qmd
 ```
 
-was adapted from a Word manuscript. It shows how to migrate:
+was adapted from a Word manuscript and rewritten as a dissertation-style chapter. It shows how to migrate:
 
-- Chinese title and author information;
-- abstract and keywords;
-- numbered headings;
-- bilingual figure captions;
-- English summary;
-- numbered references.
+- article prose into thesis chapter prose;
+- fixed numbered references into Zotero/Better BibTeX citation keys;
+- Word figure references such as `（图2）` into `图 \ref{fig:hominin-dispersal}`;
+- pasted figure captions into UCAS-style `figure`, `\bicaption`, `\fignote`, and `\label` blocks.
 
 The extracted figures are in:
 
