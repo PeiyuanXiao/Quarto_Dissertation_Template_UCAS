@@ -60,6 +60,8 @@ Quarto_Dissertation_Template_UCAS/
     ├── backmatter.qmd
     ├── render.ps1
     ├── README.md
+    ├── examples/
+    │   └── quina-article.qmd
     ├── chapters/
     │   ├── 01-introduction.qmd
     │   ├── 02-methods.qmd
@@ -98,11 +100,33 @@ Quarto_Dissertation_Template_UCAS/
 
 - [:file_folder: `thesis/_extensions/ucasthesis`](thesis/_extensions/ucasthesis) — custom Quarto extension that connects Quarto output to the UCAS LaTeX template.
 
+- [:file_folder: `thesis/examples`](thesis/examples) — worked examples converted from real academic writing, including a Quarto version of a Chinese article manuscript on Quina technology in Yunnan.
+
 ------------------------------------------------------------------------
 
-### 🚀 How to use
+### 🚀 End-to-end workflow
 
-#### 1. Clone the repository
+The intended workflow runs from project setup to final export:
+
+```text
+clone/open project
+      ↓
+check Quarto + TeX tools
+      ↓
+edit cover metadata
+      ↓
+write abstracts and chapters in .qmd
+      ↓
+add figures and references
+      ↓
+render PDF for formal layout
+      ↓
+render DOCX for draft review, if needed
+      ↓
+commit source files with Git
+```
+
+#### 1. Clone or download the repository
 
 ```sh
 git clone https://github.com/PeiyuanXiao/Quarto_Dissertation_Template_UCAS.git
@@ -119,7 +143,7 @@ Quarto_Dissertation_Template_UCAS.Rproj
 
 This keeps the project root stable when working in RStudio.
 
-#### 3. Check the required tools
+#### 3. Check Quarto and TeX
 
 In the RStudio Terminal or PowerShell, check that Quarto and the TeX tools are available:
 
@@ -138,7 +162,30 @@ tinytex::install_tinytex()
 tinytex::tlmgr_path()
 ```
 
-#### 4. Render the PDF
+#### 4. Configure thesis metadata
+
+Edit:
+
+```text
+thesis/frontinfo.tex
+```
+
+This file controls the Chinese and English cover pages. Update the thesis title, author, supervisor, degree, degree type, major, institute, and submission date before serious writing begins.
+
+#### 5. Write the dissertation
+
+Write source files in:
+
+```text
+thesis/index.qmd
+thesis/chapters/
+thesis/appendices/
+thesis/backmatter.qmd
+```
+
+The detailed writing guide is maintained in [`thesis/README.md`](thesis/README.md).
+
+#### 6. Render the official PDF
 
 From the repository root:
 
@@ -167,132 +214,50 @@ thesis/_output/中国科学院大学学位论文.pdf
 
 > **Note:** On the first render, TinyTeX may install missing LaTeX packages automatically. This is expected.
 
-------------------------------------------------------------------------
+#### 7. Render a DOCX draft
 
-### ✍️ Writing workflow
+The DOCX output is intended for content review, comments, and supervisor feedback. It does **not** reproduce the formal UCAS LaTeX layout.
 
-#### Edit the cover information
+```powershell
+quarto render thesis --to docx
+```
 
-Update:
+The DOCX file is written to:
 
 ```text
-thesis/frontinfo.tex
+thesis/_output/
 ```
 
-This file controls the Chinese and English cover pages. Edit the thesis title, author, supervisor, degree, degree type, major, institute, and submission date.
+#### 8. Version the source files
 
-#### Write the abstracts and front matter
+Commit source files, not build products:
 
-Edit:
-
-```text
-thesis/index.qmd
+```sh
+git status
+git add README.md thesis
+git commit -m "Update dissertation draft"
+git push
 ```
 
-This file contains:
-
-- Chinese abstract;
-- English abstract;
-- Chinese and English keywords;
-- table of contents;
-- lists of figures and tables;
-- symbol list.
-
-#### Write the main chapters
-
-Edit or add files in:
-
-```text
-thesis/chapters/
-```
-
-The default chapter files are:
-
-```text
-01-introduction.qmd
-02-methods.qmd
-03-conclusion.qmd
-```
-
-To add a new chapter, create a new `.qmd` file, for example:
-
-```text
-thesis/chapters/04-results.qmd
-```
-
-Then register it in [`thesis/_quarto.yml`](thesis/_quarto.yml):
-
-```yaml
-book:
-  chapters:
-    - index.qmd
-    - chapters/01-introduction.qmd
-    - chapters/02-methods.qmd
-    - chapters/03-conclusion.qmd
-    - chapters/04-results.qmd
-    - references.qmd
-    - appendices/appendix-a.qmd
-    - backmatter.qmd
-```
-
-#### Write appendices and back matter
-
-- Appendices: [`thesis/appendices/`](thesis/appendices/)
-- Acknowledgements and academic record: [`thesis/backmatter.qmd`](thesis/backmatter.qmd)
+The repository ignores Quarto caches, LaTeX auxiliary files, and rendered outputs by default.
 
 ------------------------------------------------------------------------
 
-### 🖼️ Figures and tables
+### 🧪 Worked example
 
-Store figures in:
-
-```text
-thesis/Img/
-```
-
-Simple Markdown figure:
-
-```markdown
-![Sample figure](../Img/c06h06.png){#fig-sample width=40%}
-```
-
-For UCAS-style bilingual captions, figure notes, or complex subfigures, use raw LaTeX:
-
-```tex
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=0.40\textwidth]{c06h06}
-    \bicaption{\enspace 样图}{\enspace Sample Figure}
-    \fignote{Notes for this figure}
-    \label{fig:sample}
-\end{figure}
-```
-
-Tables can be written in Markdown, Quarto, or raw LaTeX. For final dissertation formatting, raw LaTeX tables may offer the most precise control.
-
-------------------------------------------------------------------------
-
-### 📚 References
-
-Add references to:
+A Word manuscript on Middle Paleolithic Quina technology in Yunnan has been converted into a Quarto example:
 
 ```text
-thesis/Biblio/ref.bib
+thesis/examples/quina-article.qmd
 ```
 
-The template currently follows the original UCAS LaTeX bibliography setup:
+Associated extracted figures are stored in:
 
-- `biblatex`;
-- `biber`;
-- GB/T 7714 bibliography styles.
-
-Use LaTeX citation commands in the `.qmd` files:
-
-```tex
-\citep{lamport1986document}
+```text
+thesis/Img/example-quina/
 ```
 
-After rendering, `biber` is called automatically by Quarto.
+This example is useful for seeing how a conventional Chinese academic article can be reorganized into Quarto Markdown. It is not included in the default dissertation render; copy sections from it into `thesis/index.qmd` or `thesis/chapters/*.qmd` as needed.
 
 ------------------------------------------------------------------------
 

@@ -1,33 +1,333 @@
-# UCAS Thesis Quarto Template
+# Thesis Writing Guide
 
-这个目录是中国科学院大学学位论文 LaTeX 模板的 Quarto 封装版本。正文、摘要、附录和后置材料可以在 `.qmd` 文件中编辑；封面字段保留在 `frontinfo.tex` 中，以复用原模板的封面命令。
+This directory contains the working Quarto dissertation project. Open the repository-level `.Rproj` in RStudio, then edit and render files inside this `thesis/` directory.
 
-## 文件入口
+## Quick commands
 
-- `_quarto.yml`：Quarto book 项目配置，RStudio 打开本目录后会识别。
-- `frontinfo.tex`：中英文封面信息。
-- `index.qmd`：中文摘要、英文摘要、目录、图表目录、符号列表。
-- `chapters/*.qmd`：正文各章。
-- `references.qmd`：参考文献与附录切换。
-- `appendices/*.qmd`：附录。
-- `backmatter.qmd`：致谢、作者简历、成果列表。
-- `Biblio/ref.bib`：参考文献库；正文中使用 `\citep{key}` 等原模板引用命令。
-
-## 渲染
-
-在 PowerShell 或 RStudio Terminal 中运行：
+From the repository root:
 
 ```powershell
-.\render.ps1
+quarto render thesis
+quarto render thesis --to docx
 ```
 
-这个脚本会把 Quarto 的本地缓存临时放到本项目的 `.localappdata` 目录，避免访问 Windows 用户目录时遇到权限问题。
+From this directory:
 
-## 环境要求
+```powershell
+quarto render
+quarto render --to docx
+```
 
-需要安装：
+Outputs are written to:
 
-- Quarto
-- 能提供 `xelatex`、`biber`、`latexmk` 的 TeX 发行版，例如 TinyTeX、TeX Live 或 MiKTeX
+```text
+thesis/_output/
+```
 
-当前项目已能走到 PDF 渲染阶段；如果系统找不到 `xelatex`，需要先安装 TeX 发行版并把其 `bin` 目录加入 PATH。
+The PDF is the formal UCAS-style output. The DOCX output is intended only as a draft for reading, comments, and supervisor feedback.
+
+## File map
+
+```text
+thesis/
+├── _quarto.yml
+├── index.qmd
+├── frontinfo.tex
+├── references.qmd
+├── backmatter.qmd
+├── chapters/
+├── appendices/
+├── examples/
+├── Biblio/
+├── Img/
+├── Style/
+├── Tex/
+└── _extensions/ucasthesis/
+```
+
+## What to edit
+
+### `frontinfo.tex`
+
+Use this file for cover-page metadata:
+
+- Chinese thesis title;
+- English thesis title;
+- author;
+- supervisor;
+- degree level;
+- degree type;
+- major;
+- institute;
+- date.
+
+This file intentionally remains LaTeX because the UCAS class uses custom commands for the cover pages.
+
+### `index.qmd`
+
+Use this file for front matter:
+
+- Chinese abstract;
+- Chinese keywords;
+- English abstract;
+- English keywords;
+- table of contents;
+- lists of figures and tables;
+- symbol list.
+
+The table of contents and lists of figures/tables are currently controlled by raw LaTeX blocks because they follow the original UCAS template logic.
+
+### `chapters/*.qmd`
+
+Use this directory for main dissertation chapters. Each top-level heading becomes a chapter:
+
+```markdown
+# Introduction
+
+## Research Background
+
+Text...
+```
+
+### `references.qmd`
+
+This file prints the bibliography and switches the document into appendix mode. Most users do not need to edit it unless changing the bibliography or appendix structure.
+
+### `appendices/*.qmd`
+
+Use this directory for appendix chapters.
+
+### `backmatter.qmd`
+
+Use this file for:
+
+- acknowledgements;
+- author biography;
+- publications;
+- patents;
+- projects and awards.
+
+## Adding or removing chapters
+
+Create a new chapter file:
+
+```text
+chapters/04-results.qmd
+```
+
+Then register it in `_quarto.yml`:
+
+```yaml
+book:
+  chapters:
+    - index.qmd
+    - chapters/01-introduction.qmd
+    - chapters/02-methods.qmd
+    - chapters/03-conclusion.qmd
+    - chapters/04-results.qmd
+    - references.qmd
+    - appendices/appendix-a.qmd
+    - backmatter.qmd
+```
+
+The order in `_quarto.yml` is the order in the final document.
+
+## Figures
+
+Put figure files in:
+
+```text
+Img/
+```
+
+For simple figures, Markdown is enough:
+
+```markdown
+![Sample figure](../Img/c06h06.png){#fig-sample width=40%}
+```
+
+For formal UCAS-style bilingual captions, use raw LaTeX:
+
+```tex
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.40\textwidth]{c06h06}
+    \bicaption{\enspace 中文图题}{\enspace English caption}
+    \fignote{Figure note}
+    \label{fig:sample}
+\end{figure}
+```
+
+The `Style/artratex.sty` file sets the graphic search path to `Img/`, so LaTeX figures can usually refer to image basenames directly.
+
+## Tables
+
+For quick drafts, use Markdown tables:
+
+```markdown
+| Variable | Description |
+|---|---|
+| A | Example |
+```
+
+For final dissertation formatting, raw LaTeX tables are often more reliable:
+
+```tex
+\begin{table}[!htbp]
+    \bicaption{\enspace 中文表题}{\enspace English table caption}
+    \label{tab:sample}
+    \centering
+    \begin{tabular}{ll}
+        \hline
+        Variable & Description \\
+        \hline
+        A & Example \\
+        \hline
+    \end{tabular}
+\end{table}
+```
+
+## References
+
+Add BibTeX entries to:
+
+```text
+Biblio/ref.bib
+```
+
+Use the original UCAS citation commands in `.qmd` files:
+
+```tex
+\citep{lamport1986document}
+\citet{lamport1986document}
+```
+
+The PDF workflow uses:
+
+- `biblatex`;
+- `biber`;
+- GB/T 7714 bibliography styles in `Biblio/`.
+
+If Biber reports `Found 0 citekeys`, it usually means no `\citep{...}` or `\citet{...}` commands have been used yet.
+
+## Equations
+
+Inline math:
+
+```markdown
+The value is $E = mc^2$.
+```
+
+Display math:
+
+```markdown
+$$
+E = mc^2
+$$
+```
+
+For numbered equations and UCAS-compatible cross references, use LaTeX:
+
+```tex
+\begin{equation}\label{eq:sample}
+    E = mc^2
+\end{equation}
+```
+
+Then refer to it with:
+
+```tex
+\eqref{eq:sample}
+```
+
+## Worked example
+
+The example file:
+
+```text
+examples/quina-article.qmd
+```
+
+was adapted from a Word manuscript. It shows how to migrate:
+
+- Chinese title and author information;
+- abstract and keywords;
+- numbered headings;
+- bilingual figure captions;
+- English summary;
+- numbered references.
+
+The extracted figures are in:
+
+```text
+Img/example-quina/
+```
+
+This example is not part of the default dissertation render. It is a source of patterns to copy from.
+
+## PDF and DOCX outputs
+
+### Formal PDF
+
+```powershell
+quarto render thesis
+```
+
+or, from inside `thesis/`:
+
+```powershell
+quarto render
+```
+
+This uses the custom `ucasthesis-pdf` format and XeLaTeX.
+
+### Draft DOCX
+
+```powershell
+quarto render thesis --to docx
+```
+
+The DOCX output is useful for comments and collaborative reading. It does not reproduce the official UCAS LaTeX layout and may ignore raw LaTeX-only elements.
+
+## Recommended writing routine
+
+1. Open the `.Rproj` in RStudio.
+2. Edit `frontinfo.tex`.
+3. Draft abstract and keywords in `index.qmd`.
+4. Write chapter content in `chapters/*.qmd`.
+5. Add figures to `Img/` and references to `Biblio/ref.bib`.
+6. Render the PDF frequently with `quarto render thesis`.
+7. Export DOCX drafts when feedback is needed.
+8. Commit source changes with Git.
+
+## Troubleshooting
+
+### Missing TeX command
+
+Check:
+
+```powershell
+where xelatex
+where biber
+where latexmk
+```
+
+### Missing LaTeX package
+
+Install manually if TinyTeX does not install it automatically:
+
+```powershell
+tlmgr install package-name
+```
+
+### PowerShell blocks `render.ps1`
+
+Use:
+
+```powershell
+quarto render thesis
+```
+
+### Generated files appear in Git
+
+Check `.gitignore`. Build products such as `_output/`, `.quarto/`, `.aux`, `.log`, `.bbl`, and `.bcf` should not be committed.

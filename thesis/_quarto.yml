@@ -16,9 +16,11 @@ book:
 format:
   ucasthesis-pdf:
     keep-tex: true
+  docx:
+    toc: true
+    number-sections: true
 
 execute:
   echo: false
   warning: false
   message: false
-
