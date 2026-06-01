@@ -9,6 +9,7 @@ book:
     - chapters/01-introduction.qmd
     - chapters/02-methods.qmd
     - chapters/03-conclusion.qmd
+    - chapters/04-quina-example.qmd
     - references.qmd
     - appendices/appendix-a.qmd
     - backmatter.qmd
@@ -19,6 +20,8 @@ format:
   docx:
     toc: true
     number-sections: true
+    bibliography: Biblio/ref.bib
+    citeproc: true
 
 execute:
   echo: false

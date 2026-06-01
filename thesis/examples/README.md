@@ -2,9 +2,15 @@
 
 This directory contains example source files converted from real academic writing.
 
-## `quina-thesis-chapter.qmd`
+## Thesis-style Quina example
 
-`quina-thesis-chapter.qmd` is a thesis-style chapter adapted from a Chinese article manuscript on Middle Paleolithic Quina technology in Yunnan and the discussion of Neanderthals in China.
+The worked example is included directly as a dissertation chapter:
+
+```text
+../chapters/04-quina-example.qmd
+```
+
+It was adapted from a Chinese article manuscript on Middle Paleolithic Quina technology in Yunnan and the discussion of Neanderthals in China.
 
 It demonstrates:
 
@@ -14,4 +20,10 @@ It demonstrates:
 - how to use Zotero/Better BibTeX citation keys such as `[@ruan2025quina]`;
 - how to include UCAS-style bilingual figure captions and cross references using LaTeX.
 
-This file is not included in the default dissertation render. To use it as a thesis chapter, copy it into `thesis/chapters/`, then register it in `thesis/_quarto.yml`.
+Because it is registered in `../_quarto.yml`, it is rendered as part of the formal thesis PDF/DOCX when you run:
+
+```powershell
+quarto render thesis
+```
+
+Do not render files in this `examples/` directory directly unless you intentionally want a standalone preview.

@@ -60,12 +60,12 @@ Quarto_Dissertation_Template_UCAS/
     ├── backmatter.qmd
     ├── render.ps1
     ├── README.md
-    ├── examples/
-    │   └── quina-article.qmd
     ├── chapters/
     │   ├── 01-introduction.qmd
     │   ├── 02-methods.qmd
-    │   └── 03-conclusion.qmd
+    │   ├── 03-conclusion.qmd
+    │   └── 04-quina-example.qmd
+    ├── examples/
     ├── appendices/
     │   └── appendix-a.qmd
     ├── Biblio/
@@ -100,7 +100,7 @@ Quarto_Dissertation_Template_UCAS/
 
 - [:file_folder: `thesis/_extensions/ucasthesis`](thesis/_extensions/ucasthesis) — custom Quarto extension that connects Quarto output to the UCAS LaTeX template.
 
-- [:file_folder: `thesis/examples`](thesis/examples) — worked examples converted from real academic writing, including a Quarto version of a Chinese article manuscript on Quina technology in Yunnan.
+- [:file_folder: `thesis/examples`](thesis/examples) — notes for worked examples and migration patterns. The current thesis-style Quina example is registered as `thesis/chapters/04-quina-example.qmd`.
 
 ------------------------------------------------------------------------
 
@@ -269,10 +269,10 @@ The repository ignores Quarto caches, LaTeX auxiliary files, and rendered output
 
 ### 🧪 Worked example
 
-A Word manuscript on Middle Paleolithic Quina technology in Yunnan has been converted into a Quarto example:
+A Word manuscript on Middle Paleolithic Quina technology in Yunnan has been converted into a thesis-style chapter:
 
 ```text
-thesis/examples/quina-thesis-chapter.qmd
+thesis/chapters/04-quina-example.qmd
 ```
 
 Associated extracted figures are stored in:
@@ -281,7 +281,7 @@ Associated extracted figures are stored in:
 thesis/Img/example-quina/
 ```
 
-This example is formatted as a dissertation chapter rather than as a journal article. It removes the article title, author block, abstract, and keywords, uses thesis-style sectioning, Zotero/Better BibTeX citation keys, and UCAS-style figure environments. It is not included in the default dissertation render; copy it into `thesis/chapters/` and register it in `_quarto.yml` if you want to render it as part of the thesis.
+This example is formatted as a dissertation chapter rather than as a journal article. It removes the article title, author block, abstract, and keywords, uses thesis-style sectioning, Zotero/Better BibTeX citation keys, and UCAS-style figure environments. It is included in the default dissertation render, so it appears in the PDF/DOCX when you run `quarto render thesis`.
 
 ------------------------------------------------------------------------
 

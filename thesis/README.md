@@ -112,7 +112,7 @@ Use this file for:
 Create a new chapter file:
 
 ```text
-chapters/04-results.qmd
+chapters/05-results.qmd
 ```
 
 Then register it in `_quarto.yml`:
@@ -124,7 +124,8 @@ book:
     - chapters/01-introduction.qmd
     - chapters/02-methods.qmd
     - chapters/03-conclusion.qmd
-    - chapters/04-results.qmd
+    - chapters/04-quina-example.qmd
+    - chapters/05-results.qmd
     - references.qmd
     - appendices/appendix-a.qmd
     - backmatter.qmd
@@ -284,7 +285,7 @@ Then refer to it with:
 The example file:
 
 ```text
-examples/quina-thesis-chapter.qmd
+chapters/04-quina-example.qmd
 ```
 
 was adapted from a Word manuscript and rewritten as a dissertation-style chapter. It shows how to migrate:
@@ -300,7 +301,7 @@ The extracted figures are in:
 Img/example-quina/
 ```
 
-This example is not part of the default dissertation render. It is a source of patterns to copy from.
+This example is registered in `_quarto.yml`, so it is part of the default dissertation render. Remove it from `_quarto.yml` when you start a real dissertation draft and no longer want the sample chapter in the output.
 
 ## PDF and DOCX outputs
 
